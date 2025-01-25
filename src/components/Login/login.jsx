@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -14,6 +15,8 @@ import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
 import '../Login/login.scss'
+
+const baseUrl = "http://localhost:8080"
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -54,9 +57,10 @@ export default function SignIn(props) {
   const [emailErrorMessage, setEmailErrorMessage] = useState('');
   const [passwordError, setPasswordError] = useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = useState('');
+  const navigate = useNavigate();
 
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (emailError || passwordError) {
@@ -64,10 +68,28 @@ export default function SignIn(props) {
     }
 
     const data = new FormData(event.currentTarget);
-    console.log({
+    const userData = {
       email: data.get('email'),
       password: data.get('password'),
-    });
+    };
+
+    try {
+      const response = await fetch(`${baseUrl}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result.message);
+        navigate('/newsletter');
+      } else {
+        console.error('Failed to sign in');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const validateInputs = () => {
@@ -161,9 +183,8 @@ export default function SignIn(props) {
               Sign in
             </Button>
             <Link
-              to="/register" // Navigate to the /register route
+              to="/register" 
               style={{
-                // textDecoration: 'none',
                 cursor: 'pointer',
                 alignSelf: 'center',
               }}

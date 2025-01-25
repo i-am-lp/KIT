@@ -14,6 +14,8 @@ import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
 
+const baseUrl = "http://localhost:8080"
+
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -117,7 +119,7 @@ export default function SignUp(props) {
     };
   
     try {
-      const response = await fetch('http://localhost:8080/api/register', {
+      const response = await fetch(`${baseUrl}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
