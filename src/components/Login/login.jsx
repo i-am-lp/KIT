@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
@@ -62,62 +63,94 @@ export default function SignIn(props) {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    if (emailError || passwordError) {
+  
+    if (!validateInputs()) {
       return;
     }
-
+  
     const data = new FormData(event.currentTarget);
     const userData = {
-      email: data.get('email'),
-      password: data.get('password'),
+      email: data.get("email"),
+      password: data.get("password"),
     };
 
+    const fetchProtectedData = async () => {
+      const token = localStorage.getItem("token");
+    
+      const response = await fetch(`${baseUrl}/api/protected-route`, {
+        method: "GET",
+        headers: {
+          "Authorization": `Bearer ${token}`,
+        },
+      });
+    
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+      } else {
+        console.error("Failed to fetch protected data");
+      }
+    };
+  
     try {
       const response = await fetch(`${baseUrl}/api/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(userData),
       });
   
       if (response.ok) {
         const result = await response.json();
         console.log(result.message);
-        navigate('/newsletter');
+  
+        localStorage.setItem("token", result.token);
+
+        await fetchProtectedData();
+  
+        navigate("/newsletter");
       } else {
-        console.error('Failed to sign in');
+        console.error("Failed to sign in");
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
+  
 
   const validateInputs = () => {
-    const email = document.getElementById('email');
-    const password = document.getElementById('password');
-
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+  
     let isValid = true;
-
+  
     if (!email.value || !/\S+@\S+\.\S+/.test(email.value)) {
       setEmailError(true);
-      setEmailErrorMessage('Please enter a valid email address.');
+      setEmailErrorMessage("Please enter a valid email address.");
       isValid = false;
     } else {
       setEmailError(false);
-      setEmailErrorMessage('');
+      setEmailErrorMessage("");
     }
-
+  
     if (!password.value || password.value.length < 6) {
       setPasswordError(true);
-      setPasswordErrorMessage('Password must be at least 6 characters long.');
+      setPasswordErrorMessage("Password must be at least 6 characters long.");
       isValid = false;
     } else {
       setPasswordError(false);
-      setPasswordErrorMessage('');
+      setPasswordErrorMessage("");
     }
-
+  
     return isValid;
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/newsletter");
+    }
+  }, []);
+  
 
   return (
     <div>

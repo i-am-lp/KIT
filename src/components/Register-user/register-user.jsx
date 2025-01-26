@@ -14,7 +14,7 @@ import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
 
-const baseUrl = "http://localhost:8080"
+const API_URL = import.meta.env.VITE_APP_API_URL;
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -119,7 +119,7 @@ export default function SignUp(props) {
     };
   
     try {
-      const response = await fetch(`${baseUrl}/api/register`, {
+      const response = await fetch(`${API_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userData),
