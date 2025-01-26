@@ -33,7 +33,6 @@ function UpdatePage() {
   const token = localStorage.getItem('token');
   const user = token ? decodeJWT(token) : null;
 
-  console.log("Decoded User:", user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,43 +84,47 @@ function UpdatePage() {
   };
 
   return (
-    <div>
-      <h1>let's Keep In Touch</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="update_text">What's been going on?</label>
+    <div className='updates'>
+      <h1 className='updates--header'>let's Keep In Touch</h1>
+      <form onSubmit={handleSubmit}  className='updates--form'>
+        <div className='updates--form--check-in'>
+          <label htmlFor="update_text" className='updates--form--check-in__header'>🧑‍💻 What's been going on?</label>
           <textarea
             id="update_text"
             name="update_text"
             placeholder='Write something here...'
+            className='updates--form--check-in__box'
             value={formData.update_text}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div>
-          <label htmlFor="question">Let's get deep:</label>
+        <div className='updates--form--question'>
+          <label htmlFor="question" className='updates--form--question__header'>🔎 Let's get deep:</label>
           <input
             id="question"
             name="question"
             placeholder='Ask your question here...'
+            className='updates--form--question__box'
             type="text"
             value={formData.question}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div>
-          <label htmlFor="image">Image:</label>
+        <div className='updates--form--image'>
+          <label htmlFor="image" className='updates--form--image__header'>📸 Photo Wall</label>
+          <label htmlFor="image" className='updates--form--image__subheader'>Upload your fav picture here!</label>
           <input
             id="image"
             name="image"
+            className='updates--form--image__box'
             type="file"
             accept="image/*"
             onChange={handleFileChange}
           />
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className='updates--form--submit'>Share Your Update</button>
       </form>
     </div>
   );
