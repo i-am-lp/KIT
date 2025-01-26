@@ -70,6 +70,7 @@ export default function SignIn(props) {
   
     const data = new FormData(event.currentTarget);
     const userData = {
+      name: data.get("name"),
       email: data.get("email"),
       password: data.get("password"),
     };

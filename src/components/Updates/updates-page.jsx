@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
 function UpdatePage() {
@@ -11,6 +12,28 @@ function UpdatePage() {
   });
 
   const navigate = useNavigate();
+
+  const decodeJWT = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => `%${('00' + c.charCodeAt(0).toString(16)).slice(-2)}`)
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('Failed to decode JWT:', error);
+      return null;
+    }
+  };
+
+  const token = localStorage.getItem('token');
+  const user = token ? decodeJWT(token) : null;
+
+  console.log("Decoded User:", user);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,7 +53,14 @@ function UpdatePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!user) {
+      console.error('User is not logged in.');
+      return;
+    }
+
     const updateData = new FormData();
+    updateData.append('name', user.name);
+    updateData.append('user_id', user.id);
     updateData.append('update_text', formData.update_text);
     updateData.append('question', formData.question);
     updateData.append('image', formData.image);
