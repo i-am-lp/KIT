@@ -1,0 +1,170 @@
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
+
+.newsletter {
+    background-color: white;
+    margin: 45px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include tablet {
+        display: flex;
+        width: 600px;
+        justify-content: center;
+        margin: 45px auto;
+    }
+
+    &--add-update {
+        width: 30%;
+        height: 30px; 
+        border-radius: 4px;
+        border: 1.5px solid #7f00ffb3;
+        background-color: #7f00ffb3;
+        color: white;
+
+        @include tablet {
+            height: 30px;
+            font-size: 1rem;
+        }
+
+        @include desktop {
+            font-size: 1.05rem;
+        }
+
+        &--link {
+            text-decoration: none;
+            color: white;
+        }
+        
+    }
+
+    &--card {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        align-items: center;
+        padding: 16px;
+        box-shadow: hsla(220, 30%, 5%, 0.05) 5px 5px 15px -10px;
+    }
+
+    &--updates {
+
+        @include tablet {
+            width: 400px;
+        }
+
+        &__title {
+            font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
+        }
+
+        &__responses {
+            background-color: rgb(243, 238, 231);
+            font-size: .85rem;
+            padding: 8px;
+
+            @include tablet {
+                font-size: .95rem;
+            }
+
+            @include desktop {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    &--questions {
+
+        @include tablet {
+            width: 400px;
+        }
+
+        &__title {
+            font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
+        }
+
+        &__responses {
+            
+            &--box {
+                background-color: rgb(243, 238, 231);
+                font-size: .85rem;
+                padding: 8px;
+                margin-bottom: 4px;
+
+                @include desktop {
+                    margin-bottom: 10px;
+                }
+            }
+
+            &--text {
+
+                &__question {
+                    border-bottom: 1px solid lightgrey;
+                    padding-bottom: 4px;
+                    font-style: italic;
+
+                    @include tablet {
+                        font-size: .95rem;
+                    }
+
+                    @include desktop {
+                        font-size: 1rem;
+                    }
+                }
+
+                &__button {
+                    width: 17%;
+                    height: 20px; 
+                    border-radius: 4px;
+                    border: 1.5px solid #7f00ffb3;
+                    background-color: #7f00ffb3;
+                    color: white;
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+    &--images {
+
+        @include tablet {
+            width: 400px;
+        }
+
+        &__title {
+            font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
+        }
+        
+        &__block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__img {
+            width: 70vw;
+            padding-bottom: 8px;
+
+            @include tablet {
+                width: 40vw;
+                
+            }
+
+            @include desktop {
+                width: 25vw;
+            }
+        }
+    }
+}
