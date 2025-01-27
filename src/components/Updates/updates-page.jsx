@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import './updates-page.scss';
+import KIT from '../../assets/KIT.png';
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
 
@@ -85,47 +86,57 @@ function UpdatePage() {
 
   return (
     <div className='updates'>
-      <h1 className='updates--header'>let's Keep In Touch</h1>
-      <form onSubmit={handleSubmit}  className='updates--form'>
-        <div className='updates--form--check-in'>
-          <label htmlFor="update_text" className='updates--form--check-in__header'>🧑‍💻 What's been going on?</label>
-          <textarea
-            id="update_text"
-            name="update_text"
-            placeholder='Write something here...'
-            className='updates--form--check-in__box'
-            value={formData.update_text}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className='updates--form--question'>
-          <label htmlFor="question" className='updates--form--question__header'>🔎 Let's get deep:</label>
-          <input
-            id="question"
-            name="question"
-            placeholder='Ask your question here...'
-            className='updates--form--question__box'
-            type="text"
-            value={formData.question}
-            onChange={handleInputChange}
-            required
-          />
-        </div>
-        <div className='updates--form--image'>
-          <label htmlFor="image" className='updates--form--image__header'>📸 Photo Wall</label>
-          <label htmlFor="image" className='updates--form--image__subheader'>Upload your fav picture here!</label>
-          <input
-            id="image"
-            name="image"
-            className='updates--form--image__box'
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-        </div>
-        <button type="submit" className='updates--form--submit'>Share Your Update</button>
-      </form>
+      <div className='updates--card'>
+        <img src={KIT} className='updates--header' alt="KIT logo" />
+        <form onSubmit={handleSubmit}  className='updates--form'>
+          <div className='updates--form--check-in'>
+            <label htmlFor="update_text" className='updates--form--check-in__header'>🧑‍💻 What's been going on?</label>
+            <textarea
+              id="update_text"
+              name="update_text"
+              placeholder='Write something here...'
+              className='updates--form--check-in__box'
+              value={formData.update_text}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className='updates--form--question'>
+            <label htmlFor="question" className='updates--form--question__header'>🔎 Let's get deep</label>
+            <textarea
+              id="question"
+              name="question"
+              placeholder='Ask your question here...'
+              className='updates--form--question__box'
+              type="text"
+              value={formData.question}
+              onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="updates--form--image">
+            <label htmlFor="image" className="updates--form--image__header">📸 Photo wall</label>
+            <label htmlFor="image" className="updates--form--image__subheader">Upload your fav picture here!</label>
+            <label htmlFor="image" className="updates--form--image__custom-btn">+ Choose Image</label>
+            <input
+              id="image"
+              name="image"
+              className="updates--form--image__box"
+              type="file"
+              accept="image/*"
+              onChange={handleFileChange}
+            />
+            {formData.image && (
+              <p className="updates--form--image__filename">
+                {formData.image.name}
+              </p>
+            )}
+          </div>
+
+          <button type="submit" className='updates--form--submit'>Share Your Update</button>
+          <p className='updates--form--info'>You can always edit your reply later!</p>
+        </form>
+      </div>
     </div>
   );
 };

@@ -13,8 +13,31 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
+import './register-user.scss'
+import {
+  createTheme,
+  ThemeProvider,
+  alpha,
+  getContrastRatio,
+} from '@mui/material/styles';
 
 const API_URL = import.meta.env.VITE_APP_API_URL;
+
+const violetBase = '#7F00FF';
+const violetMain = alpha(violetBase, 0.7);
+
+const theme = createTheme({
+  palette: {
+    violet: {
+      main: violetMain,
+      light: alpha(violetBase, 0.5),
+      dark: alpha(violetBase, 0.9),
+      contrastText: getContrastRatio(violetMain, '#fff') > 4.5 ? '#fff' : '#111',
+    },
+  },
+});
+
+
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -29,10 +52,6 @@ const Card = styled(MuiCard)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     width: '450px',
   },
-  ...theme.applyStyles('dark', {
-    boxShadow:
-      'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
-  }),
 }));
 
 const SignUpContainer = styled(Stack)(({ theme }) => ({
@@ -140,6 +159,7 @@ export default function SignUp(props) {
 
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
       <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
       <SignUpContainer direction="column" justifyContent="space-between">
@@ -202,6 +222,7 @@ export default function SignUp(props) {
             <Button
               type="submit"
               fullWidth
+              color='violet'
               variant="contained"
               onClick={validateInputs}
             >
@@ -210,6 +231,7 @@ export default function SignUp(props) {
           </Box>
         </Card>
       </SignUpContainer>
+      </ThemeProvider>
     </div>
   );
 }

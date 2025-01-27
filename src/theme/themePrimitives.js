@@ -317,7 +317,7 @@ export const colorSchemes = {
 export const typography = {
   fontFamily: 'Inter, sans-serif',
   h1: {
-    fontSize: '3rem', // Adjusted for JavaScript; replace with exact px values if needed
+    fontSize: '3rem', 
     fontWeight: 600,
     lineHeight: 1.2,
     letterSpacing: -0.5,

@@ -16,8 +16,28 @@ import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
 import '../Login/login.scss'
+import {
+  createTheme,
+  ThemeProvider,
+  alpha,
+  getContrastRatio,
+} from '@mui/material/styles';
 
-const baseUrl = "http://localhost:8080"
+const API_URL = import.meta.env.VITE_APP_API_URL;
+
+const violetBase = '#7F00FF';
+const violetMain = alpha(violetBase, 0.7);
+
+const theme = createTheme({
+  palette: {
+    violet: {
+      main: violetMain,
+      light: alpha(violetBase, 0.5),
+      dark: alpha(violetBase, 0.9),
+      contrastText: getContrastRatio(violetMain, '#fff') > 4.5 ? '#fff' : '#111',
+    },
+  },
+});
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: 'flex',
@@ -78,7 +98,7 @@ export default function SignIn(props) {
     const fetchProtectedData = async () => {
       const token = localStorage.getItem("token");
     
-      const response = await fetch(`${baseUrl}/api/protected-route`, {
+      const response = await fetch(`${API_URL}/api/protected-route`, {
         method: "GET",
         headers: {
           "Authorization": `Bearer ${token}`,
@@ -155,6 +175,7 @@ export default function SignIn(props) {
 
   return (
     <div>
+      <ThemeProvider theme={theme}>
       <CssBaseline enableColorScheme />
       <SignInContainer direction="column" justifyContent="space-between">
         <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
@@ -212,6 +233,7 @@ export default function SignIn(props) {
               type="submit"
               fullWidth
               variant="contained"
+              className='login-button'
               onClick={validateInputs}
             >
               Sign in
@@ -228,6 +250,7 @@ export default function SignIn(props) {
           </Box>
         </Card>
       </SignInContainer>
+      </ThemeProvider>
       </div>
   );
 }
