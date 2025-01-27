@@ -8,6 +8,13 @@
     align-items: center;
     justify-content: center;
 
+    @include tablet {
+        display: flex;
+        width: 600px;
+        justify-content: center;
+        margin: 45px auto;
+    }
+
     &--card {
         display: flex;
         flex-direction: column;
@@ -19,6 +26,10 @@
 
     &--updates {
 
+        @include tablet {
+            width: 400px;
+        }
+
         &__title {
             font-size: 1rem;
         }
@@ -27,10 +38,18 @@
             background-color: rgb(243, 238, 231);
             font-size: .85rem;
             padding: 8px;
+
+            @include tablet {
+                font-size: .95rem;
+            }
         }
     }
 
     &--questions {
+
+        @include tablet {
+            width: 400px;
+        }
 
         &__title {
             font-size: 1rem;
@@ -50,7 +69,39 @@
                 &__question {
                     border-bottom: 1px solid lightgrey;
                     padding-bottom: 4px;
+                    font-style: italic;
+
+                    @include tablet {
+                        font-size: .95rem;
+                    }
                 }
+            }
+        }
+    }
+    &--images {
+
+        @include tablet {
+            width: 400px;
+        }
+        
+        &__block {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        &__img {
+            width: 70vw;
+            padding-bottom: 8px;
+
+            @include tablet {
+                width: 40vw;
+                
+            }
+
+            @include desktop {
+                width: 25vw;
             }
         }
     }

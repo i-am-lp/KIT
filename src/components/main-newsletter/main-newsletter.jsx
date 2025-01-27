@@ -70,7 +70,7 @@ function MainPage() {
 
                 <div className='newsletter--images'>
                     <h3 className='newsletter--images__title'>📸 Worth 1,000 words</h3>
-                    <div>
+                    <div className='newsletter--images__block'>
                         {data.map((item, index) => (
                             <img
                                 key={index}
