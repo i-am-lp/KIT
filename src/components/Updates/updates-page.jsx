@@ -94,7 +94,7 @@ function UpdatePage() {
             <textarea
               id="update_text"
               name="update_text"
-              placeholder='Write something here...'
+              placeholder='Give your update here...'
               className='updates--form--check-in__box'
               value={formData.update_text}
               onChange={handleInputChange}
@@ -134,7 +134,6 @@ function UpdatePage() {
           </div>
 
           <button type="submit" className='updates--form--submit'>Share Your Update</button>
-          <p className='updates--form--info'>You can always edit your reply later!</p>
         </form>
       </div>
     </div>

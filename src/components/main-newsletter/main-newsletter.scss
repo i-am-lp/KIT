@@ -15,6 +15,26 @@
         margin: 45px auto;
     }
 
+    &--add-update {
+        width: 30%;
+        height: 30px; 
+        border-radius: 4px;
+        border: 1.5px solid #7f00ffb3;
+        background-color: #7f00ffb3;
+        color: white;
+
+        @include tablet {
+            height: 30px;
+            font-size: 1rem;
+        }
+
+        &--link {
+            text-decoration: none;
+            color: white;
+        }
+        
+    }
+
     &--card {
         display: flex;
         flex-direction: column;
@@ -74,6 +94,16 @@
                     @include tablet {
                         font-size: .95rem;
                     }
+                }
+
+                &__button {
+                    width: 17%;
+                    height: 20px; 
+                    border-radius: 4px;
+                    border: 1.5px solid #7f00ffb3;
+                    background-color: #7f00ffb3;
+                    color: white;
+                    margin-left: 4px;
                 }
             }
         }
