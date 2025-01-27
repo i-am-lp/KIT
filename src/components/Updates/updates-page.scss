@@ -7,6 +7,13 @@
     background-color: white;
     margin: 45px 0;
 
+    @include tablet {
+        display: flex;
+        width: 600px;
+        justify-content: center;
+        margin: 45px auto;
+    }
+
     &--card {
     display: flex;
     flex-direction: column;
@@ -14,6 +21,14 @@
     align-self: center;
     padding: 16px;
     box-shadow: hsla(220, 30%, 5%, 0.05) 5px 5px 15px -10px;
+    }
+
+    &--header {
+
+        @include tablet {
+            width: 500px;
+            margin: auto;
+        }
     }
 
     &--form {

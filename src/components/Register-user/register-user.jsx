@@ -13,7 +13,6 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import ColorModeSelect from '../../theme/ColorModeSelect';
 import KIT from '../../assets/KIT.png';
-import './register-user.scss'
 import {
   createTheme,
   ThemeProvider,
