@@ -28,6 +28,10 @@
             font-size: 1rem;
         }
 
+        @include desktop {
+            font-size: 1.05rem;
+        }
+
         &--link {
             text-decoration: none;
             color: white;
@@ -52,6 +56,10 @@
 
         &__title {
             font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
         }
 
         &__responses {
@@ -61,6 +69,10 @@
 
             @include tablet {
                 font-size: .95rem;
+            }
+
+            @include desktop {
+                font-size: 1rem;
             }
         }
     }
@@ -73,6 +85,10 @@
 
         &__title {
             font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
         }
 
         &__responses {
@@ -82,6 +98,10 @@
                 font-size: .85rem;
                 padding: 8px;
                 margin-bottom: 4px;
+
+                @include desktop {
+                    margin-bottom: 10px;
+                }
             }
 
             &--text {
@@ -93,6 +113,10 @@
 
                     @include tablet {
                         font-size: .95rem;
+                    }
+
+                    @include desktop {
+                        font-size: 1rem;
                     }
                 }
 
@@ -112,6 +136,14 @@
 
         @include tablet {
             width: 400px;
+        }
+
+        &__title {
+            font-size: 1rem;
+
+            @include desktop {
+                font-size: 1.1rem;
+            }
         }
         
         &__block {
