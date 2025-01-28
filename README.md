@@ -8,7 +8,7 @@ The KIT is a way to Keep In Touch with friends near and far through written upda
 
 ### Problem
 
-It can be difficutlt to stay feeling connected to a larger group when you may not live near one another or talk daily. Social media apps like Instagram make it easy to see a highlight reel of what people are up to but it can't always capture the minutiae. It can also be difficult to keep up with those that may not have social media or even a smart phone.
+It can be difficult to stay feeling connected to a larger group when you may not live near one another or talk daily. Social media apps like Instagram make it easy to see a highlight reel of what people are up to but it can't always capture the minutiae. It can also be difficult to keep up with those that may not have social media or even a smart phone.
 
 ### User Profile
 
@@ -27,7 +27,7 @@ It can be difficutlt to stay feeling connected to a larger group when you may no
 - As a logged in user, I want to be able to submit pictures to the newsletter
 - As a logged in user, I want to be able to ask questions to my group
 - As a logged in user, I want to answer questions asked by my group
-- As a logged in user, I want to see answers to questions asked by me or the group
+
 
 ## Implementation
 
@@ -41,6 +41,7 @@ It can be difficutlt to stay feeling connected to a larger group when you may no
     - react
     - react-router
     - axios
+    - Material UI
 - Server libraries:
     - knex
     - express
@@ -51,17 +52,12 @@ It can be difficutlt to stay feeling connected to a larger group when you may no
 
 ### Sitemap
 
-- Home page
+
 - Newsletter
 - Update page
-- Image upload page
 - Register
 - Login 
 
-
-### Mockups
-
-TBD
 
 ### Data
 
@@ -70,12 +66,20 @@ TBD
     - email 
     - password
 
-- Updates
+- Newsletter
     - user ID
-    - timestamp
+    - ID
+    - name
     - update
     - image
     - question
+
+- Response
+    - ID
+    - Name
+    - Response
+    - user ID
+    - question ID
 
 ### Endpoints
 
@@ -94,36 +98,9 @@ Response:
     "update": "I got a new job!",
     "image": "http://localhost:8080/images/image0.jpg",
     "question": "What was the best thing you've eaten recently?",
-    "timestamp": 1691471862000
 }
 ```
 
-**Get /newsletter/:id**
-
-- Get individual newsletter response by user id as well as answers to question
-
-Parameters:
-- id: user ID as a number
-
-Response:
-```
-{
-    "id": 1,
-    "name": "Jane Doe",
-    "update": "I got a new job!",
-    "image": "http://localhost:8080/images/image0.jpg",
-    "question": "What was the last TV show you watched?",
-    "timestamp": 1691471862000,
-    "answers": [
-        {
-            "id": 2,
-            "name": "John Doe",
-            "response": "The season finale of Survivor",
-            "timestamp": 1691731062000
-        }
-    ]
-}
-```
 
 **POST /updates**
 
@@ -159,7 +136,6 @@ Response:
     "update": "I got a new job!",
     "image": "http://localhost:8080/images/image0.jpg",
     "question": "What was the best thing you've eaten recently?",
-    "timestamp": 1691471862000
 }
 ```
 
@@ -226,8 +202,6 @@ Scope your project as a sprint. Break down the tasks that will need to be comple
 - Feature: Login
     - Implement register page + form
     - Create POST /login endpoint
-
-- Feature: Home page
 
 - Feature: Update page
     - Add form to submit updates

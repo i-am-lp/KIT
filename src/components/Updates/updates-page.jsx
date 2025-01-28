@@ -87,7 +87,7 @@ function UpdatePage() {
   return (
     <div className='updates'>
       <div className='updates--card'>
-        <img src={KIT} className='updates--header' alt="KIT logo" />
+        <a href="/newsletter"> <img src={KIT} className='updates--header' alt="KIT logo" /></a>
         <form onSubmit={handleSubmit}  className='updates--form'>
           <div className='updates--form--check-in'>
             <label htmlFor="update_text" className='updates--form--check-in__header'>🧑‍💻 What's been going on?</label>

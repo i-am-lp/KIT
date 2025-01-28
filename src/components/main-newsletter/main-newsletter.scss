@@ -23,6 +23,10 @@
         background-color: #7f00ffb3;
         color: white;
 
+        &:hover {
+            background-color: #8000ff69;
+        }
+
         @include tablet {
             height: 30px;
             font-size: 1rem;
@@ -128,6 +132,16 @@
                     background-color: #7f00ffb3;
                     color: white;
                     margin-left: 4px;
+                    font-size: .6rem;
+
+                    &:hover {
+                        background-color: #8000ff69;
+                    }
+                    
+
+                    @include tablet {
+                        font-size: .8rem;
+                    }
                 }
             }
         }
