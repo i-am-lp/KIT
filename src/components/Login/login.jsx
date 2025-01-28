@@ -94,24 +94,6 @@ export default function SignIn(props) {
       email: data.get("email"),
       password: data.get("password"),
     };
-
-    const fetchProtectedData = async () => {
-      const token = localStorage.getItem("token");
-    
-      const response = await fetch(`${API_URL}/api/protected-route`, {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-    
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-      } else {
-        console.error("Failed to fetch protected data");
-      }
-    };
   
     try {
       const response = await fetch(`${API_URL}/api/login`, {
@@ -125,17 +107,28 @@ export default function SignIn(props) {
         console.log(result.message);
   
         localStorage.setItem("token", result.token);
-
-        await fetchProtectedData();
-  
         navigate("/newsletter");
       } else {
-        console.error("Failed to sign in");
+        const errorResponse = await response.json();
+  
+        if (response.status === 404) {
+          setPasswordError(true);
+          setPasswordErrorMessage("Login service is currently unavailable. Please try again later.");
+        } else if (response.status === 401) {
+          setPasswordError(true);
+          setPasswordErrorMessage("Incorrect email or password. Please try again.");
+        } else {
+          setPasswordError(true);
+          setPasswordErrorMessage("An unknown error occurred. Please try again later.");
+        }
       }
     } catch (error) {
       console.error("Error:", error);
+      setPasswordError(true);
+      setPasswordErrorMessage("Unable to connect to the server. Please check your internet connection.");
     }
   };
+  
   
 
   const validateInputs = () => {
@@ -233,6 +226,7 @@ export default function SignIn(props) {
               type="submit"
               fullWidth
               variant="contained"
+              color="violet"
               className='login-button'
               onClick={validateInputs}
             >

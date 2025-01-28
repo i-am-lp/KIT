@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     background-color: white;
+    align-items: center;
     margin: 45px 0;
 
     @include tablet {
@@ -24,10 +25,13 @@
     }
 
     &--header {
+        width: 80vw;
+        margin: auto;
 
         @include tablet {
             width: 500px;
             margin: auto;
+            margin-left: 40px;
         }
     }
 
@@ -114,6 +118,10 @@
             border: 1.5px solid #7f00ffb3;
             background-color: #7f00ffb3;
             color: white;
+
+            &:hover {
+                background-color: #8000ff69;
+            }
 
             @include tablet {
                 height: 50px;
